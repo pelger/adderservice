@@ -3,6 +3,11 @@ var restify = require('restify')
 module.exports = function (service) {
   var server = restify.createServer()
 
+  server.get('/add/ping', function (req, res, next) {
+    res.send(200, {result: 'ok'})
+    next()
+  })
+
   server.get('/add/:first/:second', function (req, res, next) {
     service.add(req.params, function (err, result) {
       if (err) { return res.send(err) }
